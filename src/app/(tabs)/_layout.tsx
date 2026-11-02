@@ -36,11 +36,11 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="storage"
+        name="Booking"
         options={{
-          title: "Storage",
+          title: "Booking",
           tabBarIcon: ({ color, size }) => (
-            <AntDesign name="database" size={size} color={color?.toString()} />
+            <Feather name="scissors" size={size} color={color?.toString()} />
           ),
         }}
       />
@@ -65,10 +65,10 @@ export default function TabLayout() {
       <Tabs.Screen
         name="settings"
         options={{
-          title: "Settings",
+          title: "Info",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons
-              name="settings-outline"
+            <Feather
+              name="info"
               size={size}
               color={color?.toString()}
             />

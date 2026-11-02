@@ -100,7 +100,6 @@ export default function SettingsScreen() {
           />
 
           <TouchableOpacity
-            onPress={handleSaveSettings}
             className="bg-blue-600 p-3.5 rounded-xl items-center"
           >
             <Text className="text-white font-bold text-sm">

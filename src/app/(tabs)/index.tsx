@@ -1,3 +1,4 @@
+import Buttons from "@/components/Buttons";
 import { useSettings } from "@/context/settingsController";
 import { useState } from "react";
 import { Image, Text, View } from "react-native";
@@ -34,8 +35,10 @@ export default function HomeScreen() {
         ></Image>
       </View>
 
-      <View className="bg-white dark:bg-slate-800 p-4 rounded-2xl mb-4 shadow-sm border border-slate-200 dark:border-slate-700 items-center">
-        <Text className="">Boulevard Barbershop</Text>
+      <View className="bg-white dark:bg-slate-800 p-4 rounded-2xl mb-4 mx-5 shadow-sm border border-slate-200 dark:border-slate-700 items-center gap-2">
+        <Text className="text-slate-700 dark:text-slate-200 text-3xl font-bold">Boulevard Barbershop</Text>
+        <Text className="text-slate-700 dark:text-slate-200 text-base">Üdvözlöljük kedves vendégeinket!</Text>
+        <Buttons></Buttons>
       </View>
     </SafeAreaView>
   );
