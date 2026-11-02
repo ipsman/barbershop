@@ -1,15 +1,13 @@
 import { useSettings } from "@/context/settingsController";
-import { setServerIp } from "@/services/backendService";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 import {
-  Alert,
   ScrollView,
   Switch,
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -29,15 +27,6 @@ export default function SettingsScreen() {
       }
     });
   }, []);
-
-  const handleSaveSettings = async () => {
-    try {
-      await setServerIp(serverUrl);
-      Alert.alert("Success", "Server settings saved successfully!");
-    } catch (error) {
-      Alert.alert("Error", "Failed to save settings.");
-    }
-  };
 
   return (
     <SafeAreaView className="flex-1 bg-slate-100 dark:bg-slate-900">

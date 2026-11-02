@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "HomeServer Dashboard",
-    "slug": "expensepro",
+    "name": "boulevard-barbershop",
+    "slug": "boulevard-barbershop",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "homeServerDashboard",
+    "scheme": "boulevard-barbershop",
     "userInterfaceStyle": "automatic",
     "android": {
       "adaptiveIcon": {
@@ -15,7 +15,7 @@
         "monochromeImage": "./assets/images/icon.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.matedevs.homeServerDashboard",
+      "package": "com.matedevs.boulevard-barbershop",
       "usesCleartextTraffic": true
     },
     "web": {
@@ -53,7 +53,7 @@
         }
       },
       "eas": {
-        "projectId": "d65f672d-2ab4-4928-aaa4-d8403ef199f7"
+        "projectId": "a84c78af-3050-442d-81c4-9274b29c73a0"
       }
     },
     "owner": "ipsman"
