@@ -1,3 +1,4 @@
+import Header from "@/components/Header";
 import { SettingsProvider } from "@/context/settingsController";
 import { Stack } from "expo-router";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -7,6 +8,7 @@ export default function RootLayout() {
   return (
     <GestureHandlerRootView>
       <SettingsProvider>
+        <Header></Header>
         <Stack screenOptions={{ headerShown: false }} />
       </SettingsProvider>
     </GestureHandlerRootView>

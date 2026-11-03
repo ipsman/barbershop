@@ -1,7 +1,7 @@
-import Services from "@/components/Services";
+import Barbers from "@/components/Barbers";
 import { useSettings } from "@/context/settingsController";
 import {
-    ScrollView
+  ScrollView
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -16,7 +16,8 @@ export default function BookingScreen() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 40 }}
       >
-        <Services></Services>
+        {/* <Services></Services> */}
+        <Barbers></Barbers>
       </ScrollView>
     </SafeAreaView>
   );

@@ -66,13 +66,14 @@ const buttonValues = [
 export default function Services() {
   return (
     <View className="flex gap-2 mt-3 w-full">
+      <Text className="text-white font-bold text-lg">Szolgáltatás kiválasztása:</Text>
       {buttonValues.map((item) => (
         <TouchableOpacity
           key={item.id}
-          className="bg-slate-700 p-2 rounded-xl items-center w-full"
-        >
-          <Text className="text-white font-bold text-lg">{item.title}</Text>
-          <Text>{item.text}</Text>
+          className="bg-slate-700 mt-2 p-2 rounded-xl items-start w-full gap-2">
+          <Text className="text-white font-bold text-md">{item.title}</Text>
+          <Text className="text-slate-300 text-md">{item.text}</Text>
+          <Text className="text-white font-bold text-md">{item.price} Ft</Text>
         </TouchableOpacity>
       ))}
     </View>

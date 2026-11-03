@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
+export type PictureItem = {
+    id: string;
+    url: string;
+};
+
 type Props = {
-  secureImageUri: string[];
+  secureImageUri: PictureItem[];
   setImageOpened: (state: boolean) => void;
 };
 
@@ -38,7 +43,7 @@ export default function ImageViewer({ secureImageUri, setImageOpened }: Props) {
           activeOpacity={0.8}
         >
           <Image
-            source={{ uri: secureImageUri[currentIndex] }}
+            source={{ uri: secureImageUri[currentIndex].url }}
             style={{ width: 320, height: 320, borderRadius: 12 }}
             resizeMode="cover"
             onError={(e) =>
