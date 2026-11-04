@@ -13,7 +13,7 @@ const buttonValues = [
     id: "1",
     title: "Skin Fade (Bőrből induló átmenet)",
     text: "• Átmenet vágása borotvagépről indulva + hajmosás ha szükséges + finishelés",
-    time: "1 óra ",
+    time: "1 óra",
     price: 6500,
   },
   {

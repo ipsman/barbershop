@@ -79,7 +79,7 @@ export default function TimeTable({ barberName, serviceName }: Props) {
 
   return (
     <View className="bg-slate-800 p-4 rounded-2xl w-full mt-3 gap-4 border border-slate-700">
-      <View className="flex items-center">
+      <View className="flex items-center gap-1">
         <Image
           source={{
             uri: "https://cdn.salonic.hu/2620/employees/160_34fac443bf0b2202d7e4938d6c5c48d6.png",

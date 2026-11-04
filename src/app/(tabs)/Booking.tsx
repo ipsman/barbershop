@@ -1,4 +1,5 @@
 import Barbers from "@/components/Barbers";
+import BookingForm from "@/components/bookingForm";
 import Services, { Service } from "@/components/Services";
 import TimeTable from "@/components/timeTable";
 import { useSettings } from "@/context/settingsController";
@@ -39,10 +40,12 @@ export default function BookingScreen() {
             <TimeTable
               barberName={selectedBarber}
               serviceName={
-                selectedService?.title || "" + selectedService?.time || ""
+              (selectedService?.title || "") + " (" + (selectedService?.time || "") + ")"
               }
             ></TimeTable>
-          ))}
+          ) || (bookingState == "bookingForm" && (
+            <BookingForm barberName={selectedBarber} serviceName={selectedService}></BookingForm>
+          )))}
       </ScrollView>
     </SafeAreaView>
   );
