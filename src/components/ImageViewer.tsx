@@ -2,13 +2,13 @@ import { useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
 export type PictureItem = {
-    id: string;
-    url: string;
+  id: string;
+  url: string;
 };
 
 type Props = {
   secureImageUri: PictureItem[];
-  setImageOpened: (state: boolean) => void;
+  setImageOpened: (state: boolean, pictureId: string) => void;
 };
 
 export default function ImageViewer({ secureImageUri, setImageOpened }: Props) {
@@ -37,20 +37,12 @@ export default function ImageViewer({ secureImageUri, setImageOpened }: Props) {
   return (
     <View className="items-center justify-center p-3">
       <View className="relative">
-        {/* Kép megnyitása nagyítva kattintásra */}
-        <TouchableOpacity
-          onPress={() => setImageOpened(true)}
-          activeOpacity={0.8}
-        >
-          <Image
-            source={{ uri: secureImageUri[currentIndex].url }}
-            style={{ width: 320, height: 320, borderRadius: 12 }}
-            resizeMode="cover"
-            onError={(e) =>
-              console.log("Image load error:", e.nativeEvent.error)
-            }
-          />
-        </TouchableOpacity>
+        <Image
+          source={{ uri: secureImageUri[currentIndex].url }}
+          style={{ width: 320, height: 320, borderRadius: 12 }}
+          resizeMode="cover"
+          onError={(e) => console.log("Image load error:", e.nativeEvent.error)}
+        />
 
         {/* 3. Nyilak megjelenítése, HA TÖBB KÉP VAN (length > 1) */}
         {secureImageUri.length > 1 && (
@@ -79,6 +71,13 @@ export default function ImageViewer({ secureImageUri, setImageOpened }: Props) {
                 {currentIndex + 1} / {secureImageUri.length}
               </Text>
             </View>
+            <TouchableOpacity
+              className="absolute right-2 top-[45%] bg-black/50 p-2 rounded-full items-center justify-center z-10"
+              onPress={() => setImageOpened}
+              activeOpacity={0.7}
+            >
+              <Text className="text-white text-sm font-bold">X</Text>
+            </TouchableOpacity>
           </>
         )}
       </View>

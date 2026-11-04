@@ -1,13 +1,26 @@
 import Barbers from "@/components/Barbers";
+import Services, { Service } from "@/components/Services";
+import TimeTable from "@/components/timeTable";
 import { useSettings } from "@/context/settingsController";
-import {
-  ScrollView
-} from "react-native";
+import { useState } from "react";
+import { ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function BookingScreen() {
   const { theme, setTheme } = useSettings();
-  const isDarkMode = theme?.toLowerCase() === "dark";
+  const [bookingState, setBookingState] = useState("service");
+  const [selectedService, setSelectedService] = useState<Service>();
+  const [selectedBarber, setSelectedBarber] = useState("");
+
+  const handleSelectedService = (service: Service) => {
+    setSelectedService(service);
+    setBookingState("barber");
+  };
+
+  const handleSelectedBarber = (barberName: string) => {
+    setSelectedBarber(barberName);
+    setBookingState("timetable");
+  };
 
   return (
     <SafeAreaView className="flex-1 bg-slate-100 dark:bg-slate-900">
@@ -16,8 +29,20 @@ export default function BookingScreen() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 40 }}
       >
-        {/* <Services></Services> */}
-        <Barbers></Barbers>
+        {(bookingState == "service" && (
+          <Services setSelectedService={handleSelectedService}></Services>
+        )) ||
+          (bookingState == "barber" && (
+            <Barbers setName={handleSelectedBarber}></Barbers>
+          )) ||
+          (bookingState == "timetable" && (
+            <TimeTable
+              barberName={selectedBarber}
+              serviceName={
+                selectedService?.title || "" + selectedService?.time || ""
+              }
+            ></TimeTable>
+          ))}
       </ScrollView>
     </SafeAreaView>
   );
