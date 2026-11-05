@@ -2,16 +2,22 @@ import Barbers from "@/components/Barbers";
 import BookingForm from "@/components/bookingForm";
 import Services, { Service } from "@/components/Services";
 import TimeTable from "@/components/timeTable";
-import { useSettings } from "@/context/settingsController";
 import { useState } from "react";
 import { ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+// Javítva: Mostantól tartalmazza a teljes Service objektumot és a dátumot is!
+export interface Booking {
+  barberName: string;
+  service: Service;
+  appointmentDate: Date;
+}
+
 export default function BookingScreen() {
-  const { theme, setTheme } = useSettings();
   const [bookingState, setBookingState] = useState("service");
   const [selectedService, setSelectedService] = useState<Service>();
   const [selectedBarber, setSelectedBarber] = useState("");
+  const [bookingData, setBookingData] = useState<Booking>();
 
   const handleSelectedService = (service: Service) => {
     setSelectedService(service);
@@ -21,6 +27,11 @@ export default function BookingScreen() {
   const handleSelectedBarber = (barberName: string) => {
     setSelectedBarber(barberName);
     setBookingState("timetable");
+  };
+
+  const handleAddBookingDate = (bookingData: Booking) => {
+    setBookingData(bookingData);
+    setBookingState("bookingForm");
   };
 
   return (
@@ -39,13 +50,13 @@ export default function BookingScreen() {
           (bookingState == "timetable" && (
             <TimeTable
               barberName={selectedBarber}
-              serviceName={
-              (selectedService?.title || "") + " (" + (selectedService?.time || "") + ")"
-              }
+              service={selectedService!} // Átadjuk a teljes Service objektumot!
+              addAppointment={handleAddBookingDate}
             ></TimeTable>
-          ) || (bookingState == "bookingForm" && (
-            <BookingForm barberName={selectedBarber} serviceName={selectedService}></BookingForm>
-          )))}
+          )) ||
+          (bookingState == "bookingForm" && (
+            <BookingForm bookingData={bookingData}></BookingForm>
+          ))}
       </ScrollView>
     </SafeAreaView>
   );

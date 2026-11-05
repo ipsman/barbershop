@@ -1,3 +1,5 @@
+import { Booking } from "@/app/(tabs)/Booking";
+import { Service } from "@/components/Services";
 import { useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
@@ -30,10 +32,15 @@ const hetNapjai = ["H", "K", "Sze", "Cs", "P", "Szo", "V"];
 
 type Props = {
   barberName: string;
-  serviceName: string;
+  service: Service; // Teljes Service objektum várható
+  addAppointment: (data: Booking) => void;
 };
 
-export default function TimeTable({ barberName, serviceName }: Props) {
+export default function TimeTable({
+  barberName,
+  service,
+  addAppointment,
+}: Props) {
   const today = new Date();
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
@@ -77,6 +84,25 @@ export default function TimeTable({ barberName, serviceName }: Props) {
 
   const currentSlots = availableSlotsData[selectedDate] || [];
 
+  const handleTimeSelect = (time: string) => {
+    setSelectedTime(time);
+
+    // Összeállítjuk a dátumot és időt
+    const appointmentDateTime =
+      selectedDate && time
+        ? new Date(`${selectedDate}T${time}:00`)
+        : new Date();
+
+    const newBooking: Booking = {
+      barberName: barberName,
+      service: service, // Átadjuk a teljes Service objektumot
+      appointmentDate: appointmentDateTime,
+    };
+
+    // Azonnal továbbadjuk a szülő (BookingScreen) komponensnek
+    addAppointment(newBooking);
+  };
+
   return (
     <View className="bg-slate-800 p-4 rounded-2xl w-full mt-3 gap-4 border border-slate-700">
       <View className="flex items-center gap-1">
@@ -87,7 +113,12 @@ export default function TimeTable({ barberName, serviceName }: Props) {
           className="w-20 aspect-square rounded-full"
         />
         <Text className="text-white font-bold text-md">{barberName}</Text>
-        <Text className="text-slate-300 text-md">{serviceName}</Text>
+        <Text className="text-[#ffc629] font-semibold text-md">
+          {service.title}
+        </Text>
+        <Text className="text-slate-300 text-xs">
+          {service.time} • {service.price} Ft
+        </Text>
       </View>
 
       <View className="bg-slate-500 h-0.5 w-full my-1" />
@@ -201,7 +232,7 @@ export default function TimeTable({ barberName, serviceName }: Props) {
                 return (
                   <TouchableOpacity
                     key={time}
-                    onPress={() => setSelectedTime(time)}
+                    onPress={() => handleTimeSelect(time)}
                     className={`py-2 px-4 rounded-lg border ${
                       isTimeSelected
                         ? "bg-green-600 border-green-500"
@@ -211,7 +242,7 @@ export default function TimeTable({ barberName, serviceName }: Props) {
                     <Text
                       className={`font-bold text-sm ${isTimeSelected ? "text-white" : "text-slate-200"}`}
                     >
-                      {time} {isTimeSelected ? "✓" : ""}
+                      {time}
                     </Text>
                   </TouchableOpacity>
                 );
@@ -220,20 +251,6 @@ export default function TimeTable({ barberName, serviceName }: Props) {
           )}
         </View>
       </View>
-
-      {/* --- 3. VÉGLEGESÍTŐ GOMB --- */}
-      {selectedTime && (
-        <TouchableOpacity
-          className="bg-[#ffc629] p-3 rounded-xl items-center mt-1 shadow-lg"
-          onPress={() =>
-            alert(`Sikeres foglalás: ${selectedDate} - ${selectedTime}`)
-          }
-        >
-          <Text className="text-slate-900 font-bold text-base">
-            Foglalás megerősítése ({selectedDate} - {selectedTime})
-          </Text>
-        </TouchableOpacity>
-      )}
     </View>
   );
 }

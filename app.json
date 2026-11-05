@@ -15,7 +15,7 @@
         "monochromeImage": "./assets/images/icon.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.matedevs.boulevard-barbershop",
+      "package": "com.ipsman.boulevardbarbershop",
       "usesCleartextTraffic": true
     },
     "web": {
